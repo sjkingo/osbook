@@ -1,0 +1,53 @@
+@import url(http://fonts.googleapis.com/css?family=Lora|Roboto+Mono);
+
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+}
+
+div.document {
+    max-width: 50em;
+    margin: 0 auto;
+}
+
+div.document p {
+    font-size: 1.1em;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+div.document p,
+div.footer p {
+    line-height: 1.6em;
+}
+
+div.footer {
+    font-size: 0.8em;
+    text-align: center;
+    color: #666;
+    margin-top: 4em;
+    border-top: 1px solid #ededed;
+    padding: 0.5em;
+}
+
+h1 {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+a.headerlink {
+    font-size: 16px;
+    margin-left: 10px;
+    position: relative; bottom: 4px;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: 300;
+}
+
+pre {
+    font-family: 'Roboto Mono', monospace;
+    padding: 0.5em;
+}
+
+/* Pygments styles */
+.highlight {
+    background: #f6f6f6 !important;
+}
