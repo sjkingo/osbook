@@ -10,13 +10,15 @@ div.document {
     margin: 0 auto;
 }
 
-div.document p {
+div.document p,
+ul {
     font-size: 1.1em;
     color: rgba(0, 0, 0, 0.8);
 }
 
 div.document p,
-div.footer p {
+div.footer p,
+ul {
     line-height: 1.6em;
 }
 
@@ -42,12 +44,41 @@ a.headerlink {
     font-weight: 300;
 }
 
-pre {
-    font-family: 'Roboto Mono', monospace;
-    padding: 0.5em;
+ul {
+    margin-left: -25px;
 }
 
-/* Pygments styles */
+/* Monospace blocks */
+pre,
+span.pre {
+    font-family: 'Roboto Mono', monospace;
+}
+span.pre {
+    font-size: 0.9em;
+}
+pre {
+    padding: 0.5em;
+    margin: 0.2em;
+}
+span.pre,
 .highlight {
     background: #f6f6f6 !important;
+}
+td.linenos {
+    position: absolute;
+    margin-left: -40px;
+    color: #999;
+}
+.highlight,
+.highlight .hll,
+table.highlighttable {
+    width: 100%;
+}
+.highlight .hll {
+    display: block;
+}
+div.code-block-caption {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-left: 7px;
 }
