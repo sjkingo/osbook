@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Operating Systems Development 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/minimal.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="None" href="index.html#document-index" /> 
+  </head>
+  <body>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="a-beginner-s-guide-to-operating-systems-development">
+<h1>A beginner&#8217;s guide to operating systems development<a class="headerlink" href="#a-beginner-s-guide-to-operating-systems-development" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<span id="document-intro"></span><div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>This book has been written to be a practical guide on developing operating
+systems, and specifially, for Intel&#8217;s x86-architecture. It assumes you already
+have a working knowledge of the internals of an operating system and will
+attempt to guide you along to implement that knowledge into a small bootable
+kernel.</p>
+<p>Some theory will be presented where appropriate and in topics that are of
+particular interest to the author.</p>
+<div class="section" id="required-knowledge">
+<h3>Required knowledge<a class="headerlink" href="#required-knowledge" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="build-environment">
+<h3>Build environment<a class="headerlink" href="#build-environment" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="how-this-book-was-written">
+<h3>How this book was written<a class="headerlink" href="#how-this-book-was-written" title="Permalink to this headline">¶</a></h3>
+<p>The book is written in reStructuredText and generated using <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>, using a
+<a class="reference external" href="https://github.com/sjkingo/osbook/tree/master/book/minimal_theme">custom theme</a>. <a class="reference external" href="https://github.com/sjkingo/osbook">The source</a> is available &#8212; patches welcome!</p>
+</div>
+</div>
+<span id="document-booting"></span><div class="section" id="booting-and-getting-to-c">
+<h2>Booting and Getting to C<a class="headerlink" href="#booting-and-getting-to-c" title="Permalink to this headline">¶</a></h2>
+<p>First, we must do stuff, such as testing out Pygments:</p>
+<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;foop.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">do_more_stuff</span><span class="p">();</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>But before we do that, here&#8217;s some assembly:</p>
+<div class="highlight-gas"><div class="highlight"><pre><span class="nl">go:</span>
+    <span class="nf">mov</span> <span class="mi">0xdeadbeef</span><span class="p">,</span> <span class="nv">%ebx</span>
+    <span class="nf">push</span> <span class="nv">%ebx</span>
+    <span class="nf">jmp</span> <span class="no">stop</span>
+<span class="nl">stop:</span>
+    <span class="nf">jmp</span> <span class="no">$</span>
+</pre></div>
+</div>
+<p>And you can build it like so (this time, without Pygments):</p>
+<div class="highlight-python"><div class="highlight"><pre>$ gcc -o gogo.o -c go.S
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Sam Kingston &lt;sam@sjkwi.com.au&gt;.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
