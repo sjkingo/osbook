@@ -20,7 +20,7 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean singlehtml epub latexpdf linkcheck serve gh-pages
+.PHONY: help clean singlehtml epub latexpdf linkcheck serve gh-pages rebuild
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -29,6 +29,7 @@ help:
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  serve      to build a single large HTML file and serve it at http://localhost:8000/"
+	@echo "  rebuild    use inotifywait(1) to watch and rebuild the source when it changes"
 
 clean:
 	rm -rf $(BUILDDIR)/*
@@ -62,3 +63,6 @@ serve: clean singlehtml
 
 gh-pages: singlehtml
 	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
+
+rebuild:
+	while inotifywait -q -e modify -e create -e delete -r --exclude '\.(sw?)' source minimal_theme ; do make singlehtml ; done
