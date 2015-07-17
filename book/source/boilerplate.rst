@@ -17,20 +17,27 @@ Let's break that down so it's clear what is going on:
 
 .. literalinclude:: files/Makefile
     :language: make
-    :lines: 1-4
+    :lines: 1-2
 
-The first two lines above specify the compiler we want to use for C and
-assembly. The last two are the flags to pass to the
-compiler---``$(CFLAGS)``---and the linker---``$(LDFLAGS)``:
+The first two lines specify the compiler we want to use for C and assembly --
+in this case, ``gcc``, the GNU compiler.
 
-Compiler flags:
+.. literalinclude:: files/Makefile
+    :language: make
+    :lines: 3
+
+``CFLAGS`` specifies the flags to pass to ``gcc`` when compiling C:
 
 * ``-m32``: specifies the architecture of the resulting object files should be 32-bit (only required if your computer is 64-bit)
 * ``-Wall`` and ``-Wextra``: turn on extra warnings while compiling
 * ``-ffreestanding``: specifies there is no hosted environment and that the standard library should not be included
 * ``-std=gnu99``: use C99 extensions
 
-Linker flags:
+.. literalinclude:: files/Makefile
+    :language: make
+    :lines: 4
+
+``LDFLAGS`` specifies the flags to pass to ``ld`` when linking the compiled object files:
 
 * ``-T linker.ld``: the path to the linker script, which we will create next
 * ``-nostdlib``: don't link with ``libc``
