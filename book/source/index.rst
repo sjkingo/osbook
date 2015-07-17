@@ -1,8 +1,10 @@
 A beginner's guide to operating systems development
 ===================================================
 
-.. toctree::
+.. globalindex::
    :maxdepth: 2
+
+.. toctree::
    :numbered:
 
    intro
