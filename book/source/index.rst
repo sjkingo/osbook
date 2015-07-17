@@ -8,4 +8,5 @@ A beginner's guide to operating systems development
    :numbered:
 
    intro
+   boilerplate
    booting
