@@ -13,8 +13,19 @@ particular interest to the author.
 Required knowledge
 ------------------
 
-Build environment
------------------
+You will need a strong knowledge of C, an ability to understand the syntax of
+assembly (though you won't need to write much), and a general theory of how
+operating systems work -- this book will tell you how they're put together.
+
+Terminology
+-----------
+
+* *operating system*: a complete software package including both a kernel and a
+  userland implementation
+* *kernel*: the core piece of software that interfaces software with hardware --
+  **this book focuses on this**
+* *userland*: a collection of programs, libraries and scripts that the user uses
+  to interface with a kernel
 
 How this book was written
 -------------------------

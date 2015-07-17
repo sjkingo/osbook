@@ -1,28 +1,11 @@
 Booting and Getting to C
 ========================
 
-First, we must do stuff, such as testing out Pygments:
+Unlike writing a userland program in C, there is a not-so-insignificant amount
+of work we must do first to be able to compile and boot our operating system. In
+userland, most of this heavy lifting is performed for us by the compiler and linker,
+so we can simply write C and have it run.
 
-.. code-block:: c
+When writing our own operating system, none of this support exists! Writing it ourselves
+isn't especially difficult.
 
-    #include <foop.h>
-
-    int do_stuff(void) {
-        int a = do_more_stuff();
-        return a**2;
-    }
-
-But before we do that, here's some assembly:
-
-.. code-block:: gas
-
-    go:
-        mov 0xdeadbeef, %ebx
-        push %ebx
-        jmp stop
-    stop:
-        jmp $
-
-And you can build it like so (this time, without Pygments)::
-
-    $ gcc -o gogo.o -c go.S
