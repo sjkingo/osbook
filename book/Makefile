@@ -65,5 +65,5 @@ publish: singlehtml
 	rsync -av --delete --exclude '.git' $(BUILDDIR)/singlehtml/ $(COPYDIR)/
 	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
 
-rebuild:
+rebuild: singlehtml
 	while inotifywait -q -e modify -e create -e delete -r --exclude '\.(sw?)' source minimal_theme ; do make singlehtml ; done
