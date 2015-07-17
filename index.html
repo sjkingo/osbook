@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="None" href="index.html#document-index" /> 
   </head>
-  <body>
+  <body role="document">
 
     <div class="document">
 
@@ -33,13 +33,27 @@
 
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="a-beginner-s-guide-to-operating-systems-development">
 <h1>A beginner&#8217;s guide to operating systems development<a class="headerlink" href="#a-beginner-s-guide-to-operating-systems-development" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-intro">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-intro#required-knowledge">1.1. Required knowledge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-intro#terminology">1.2. Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-intro#how-this-book-was-written">1.3. How this book was written</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-boilerplate">2. Build boilerplate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-boilerplate#makefile">2.1. Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#document-boilerplate#linker-ld-the-linker-script">2.2. linker.ld: the linker script</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#document-booting">3. Booting and Getting to C</a></li>
+</ul>
 <div class="toctree-wrapper compound">
 <span id="document-intro"></span><div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This book has been written to be a practical guide on developing operating
 systems, and specifially, for Intel&#8217;s x86-architecture. It assumes you already
 have a working knowledge of the internals of an operating system and will
@@ -48,41 +62,264 @@ kernel.</p>
 <p>Some theory will be presented where appropriate and in topics that are of
 particular interest to the author.</p>
 <div class="section" id="required-knowledge">
-<h3>Required knowledge<a class="headerlink" href="#required-knowledge" title="Permalink to this headline">¶</a></h3>
+<h3>1.1. Required knowledge<a class="headerlink" href="#required-knowledge" title="Permalink to this headline">¶</a></h3>
+<p>You will need a strong knowledge of C, an ability to understand the syntax of
+assembly (though you won&#8217;t need to write much), and a general theory of how
+operating systems work &#8211; this book will tell you how they&#8217;re put together.</p>
 </div>
-<div class="section" id="build-environment">
-<h3>Build environment<a class="headerlink" href="#build-environment" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="terminology">
+<h3>1.2. Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><em>operating system</em>: a complete software package including both a kernel and a
+userland implementation</li>
+<li><em>kernel</em>: the core piece of software that interfaces software with hardware &#8211;
+<strong>this book focuses on this</strong></li>
+<li><em>userland</em>: a collection of programs, libraries and scripts that the user uses
+to interface with a kernel</li>
+</ul>
 </div>
 <div class="section" id="how-this-book-was-written">
-<h3>How this book was written<a class="headerlink" href="#how-this-book-was-written" title="Permalink to this headline">¶</a></h3>
+<h3>1.3. How this book was written<a class="headerlink" href="#how-this-book-was-written" title="Permalink to this headline">¶</a></h3>
 <p>The book is written in reStructuredText and generated using <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>, using a
 <a class="reference external" href="https://github.com/sjkingo/osbook/tree/master/book/minimal_theme">custom theme</a>. <a class="reference external" href="https://github.com/sjkingo/osbook">The source</a> is available &#8212; patches welcome!</p>
 </div>
 </div>
-<span id="document-booting"></span><div class="section" id="booting-and-getting-to-c">
-<h2>Booting and Getting to C<a class="headerlink" href="#booting-and-getting-to-c" title="Permalink to this headline">¶</a></h2>
-<p>First, we must do stuff, such as testing out Pygments:</p>
-<div class="highlight-c"><div class="highlight"><pre><span class="cp">#include &lt;foop.h&gt;</span>
+<span id="document-boilerplate"></span><div class="section" id="build-boilerplate">
+<h2>2. Build boilerplate<a class="headerlink" href="#build-boilerplate" title="Permalink to this headline">¶</a></h2>
+<p>First, we must set up our build boilerplate. For this we will be using the GNU
+compiler (<code class="docutils literal"><span class="pre">gcc</span></code>) and <code class="docutils literal"><span class="pre">make</span></code> to script our build process.</p>
+<div class="section" id="makefile">
+<h3>2.1. Makefile<a class="headerlink" href="#makefile" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference download internal" href="_downloads/Makefile"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">Makefile</span></code></a></p>
+<div class="highlight-make"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">CC</span><span class="o">=</span>		gcc
+<span class="nv">AS</span><span class="o">=</span>		<span class="k">$(</span>CC<span class="k">)</span>
+<span class="nv">CFLAGS</span><span class="o">=</span>		-m32 -Wall -Wextra -ffreestanding -std<span class="o">=</span>gnu99
+<span class="nv">LDFLAGS</span><span class="o">=</span>	-T linker.ld -nostdlib -lgcc -Wl,--build-id<span class="o">=</span>none
 
-<span class="kt">int</span> <span class="nf">do_stuff</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">do_more_stuff</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="nv">KERNEL_BIN</span><span class="o">=</span>	kernel.bin
+<span class="nv">KERNEL_OBJS</span><span class="o">=</span>
+
+<span class="nf">$(KERNEL_BIN)</span><span class="o">:</span> <span class="n">linker</span>.<span class="n">ld</span> <span class="k">$(</span><span class="nv">KERNEL_OBJS</span><span class="k">)</span>
+	<span class="k">$(</span>CC<span class="k">)</span> -m32 <span class="k">$(</span>LDFLAGS<span class="k">)</span> -o <span class="nv">$@</span> <span class="k">$(</span>KERNEL_OBJS<span class="k">)</span>
+
+<span class="nf">%.o</span><span class="o">:</span> %.<span class="n">c</span>
+	<span class="k">$(</span>CC<span class="k">)</span> <span class="k">$(</span>CFLAGS<span class="k">)</span> -c <span class="nv">$*</span>.c -o <span class="nv">$*</span>.o
+
+<span class="nf">.PHONY</span><span class="o">:</span> <span class="n">clean</span>
+<span class="nf">clean</span><span class="o">:</span>
+	rm -f <span class="k">$(</span>KERNEL_BIN<span class="k">)</span> <span class="k">$(</span>KERNEL_OBJS<span class="k">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>Let&#8217;s break that down so it&#8217;s clear what is going on:</p>
+<div class="highlight-make"><div class="highlight"><pre><span class="nv">CC</span><span class="o">=</span>		gcc
+<span class="nv">AS</span><span class="o">=</span>		<span class="k">$(</span>CC<span class="k">)</span>
+<span class="nv">CFLAGS</span><span class="o">=</span>		-m32 -Wall -Wextra -ffreestanding -std<span class="o">=</span>gnu99
+<span class="nv">LDFLAGS</span><span class="o">=</span>	-T linker.ld -nostdlib -lgcc -Wl,--build-id<span class="o">=</span>none
 </pre></div>
 </div>
-<p>But before we do that, here&#8217;s some assembly:</p>
-<div class="highlight-gas"><div class="highlight"><pre><span class="nl">go:</span>
-    <span class="nf">mov</span> <span class="mi">0xdeadbeef</span><span class="p">,</span> <span class="nv">%ebx</span>
-    <span class="nf">push</span> <span class="nv">%ebx</span>
-    <span class="nf">jmp</span> <span class="no">stop</span>
-<span class="nl">stop:</span>
-    <span class="nf">jmp</span> <span class="no">$</span>
+<p>The first two lines above specify the compiler we want to use for C and
+assembly. The last two are the flags to pass to the
+compiler&#8212;<code class="docutils literal"><span class="pre">$(CFLAGS)</span></code>&#8212;and the linker&#8212;<code class="docutils literal"><span class="pre">$(LDFLAGS)</span></code>:</p>
+<p>Compiler flags:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-m32</span></code>: specifies the architecture of the resulting object files should be 32-bit (only required if your computer is 64-bit)</li>
+<li><code class="docutils literal"><span class="pre">-Wall</span></code> and <code class="docutils literal"><span class="pre">-Wextra</span></code>: turn on extra warnings while compiling</li>
+<li><code class="docutils literal"><span class="pre">-ffreestanding</span></code>: specifies there is no hosted environment and that the standard library should not be included</li>
+<li><code class="docutils literal"><span class="pre">-std=gnu99</span></code>: use C99 extensions</li>
+</ul>
+<p>Linker flags:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">-T</span> <span class="pre">linker.ld</span></code>: the path to the linker script, which we will create next</li>
+<li><code class="docutils literal"><span class="pre">-nostdlib</span></code>: don&#8217;t link with <code class="docutils literal"><span class="pre">libc</span></code></li>
+<li><code class="docutils literal"><span class="pre">-lgcc</span></code>: link with <code class="docutils literal"><span class="pre">libgcc</span></code> (this provides some cool things which we&#8217;ll talk about later)</li>
+<li><code class="docutils literal"><span class="pre">-Wl,--build-id=none</span></code>: disable a warning about some meta information the linker tries (and fails) to add to the binary</li>
+</ul>
+<div class="highlight-make"><div class="highlight"><pre><span class="nv">KERNEL_BIN</span><span class="o">=</span>	kernel.bin
+<span class="nv">KERNEL_OBJS</span><span class="o">=</span>
 </pre></div>
 </div>
-<p>And you can build it like so (this time, without Pygments):</p>
-<div class="highlight-python"><div class="highlight"><pre>$ gcc -o gogo.o -c go.S
+<p>The above two lines specify the names of the kernel binary and object files
+that we will add when we start writing our kernel.</p>
+<p>The rest of the <code class="docutils literal"><span class="pre">Makefile</span></code> specify rules about how to make parts of the
+kernel. If it isn&#8217;t obvious to you how it works, have a look at some tutorials
+on Makefile rules as it&#8217;s outside the scope of this book.</p>
+<div class="highlight-python"><div class="highlight"><pre>ENTRY(multiboot_entry) /* in boot.S */
+
+SECTIONS
+{
+    /* Load the kernel at 1M of lower memory */
+    . = 1M;
+
+    /* Multiboot header and code: must be within the first 8K */
+    .text ALIGN(4K) :
+    {
+        *(.mbhdr)
+        *(.text)
+    }
+
+    /* Read-only data */
+    .rodata ALIGN(4K) :
+    {
+        *(.rodata)
+    }
+
+    /* Read-write data (initialized) */
+    .data ALIGN(4K) :
+    {
+        *(.data)
+    }
+
+    /* Read-write data (uninitialized) */
+    .bss :
+    {
+        sbss = .;
+        *(COMMON)
+        *(.bss)
+        ebss = .;
+    }
+
+    /* Kernel stack */
+    .kstack :
+    {
+        *(.kstack)
+    }
+
+    /* Throw away some sections */
+    /DISCARD/ :
+    {
+        *(.note.gnu.build-id)
+        *(.comment)
+    }
+}
 </pre></div>
 </div>
+</div>
+<div class="section" id="linker-ld-the-linker-script">
+<h3>2.2. linker.ld: the linker script<a class="headerlink" href="#linker-ld-the-linker-script" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference download internal" href="_downloads/linker.ld"><code class="xref download docutils literal"><span class="pre">Download</span> <span class="pre">linker.ld</span></code></a></p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre></div></td><td class="code"><div class="highlight"><pre>ENTRY(multiboot_entry) /* in boot.S */
+
+SECTIONS
+{
+    /* Load the kernel at 1M of lower memory */
+    . = 1M;
+
+    /* Multiboot header and code: must be within the first 8K */
+    .text ALIGN(4K) :
+    {
+        *(.mbhdr)
+        *(.text)
+    }
+
+    /* Read-only data */
+    .rodata ALIGN(4K) :
+    {
+        *(.rodata)
+    }
+
+    /* Read-write data (initialized) */
+    .data ALIGN(4K) :
+    {
+        *(.data)
+    }
+
+    /* Read-write data (uninitialized) */
+    .bss :
+    {
+        sbss = .;
+        *(COMMON)
+        *(.bss)
+        ebss = .;
+    }
+
+    /* Kernel stack */
+    .kstack :
+    {
+        *(.kstack)
+    }
+
+    /* Throw away some sections */
+    /DISCARD/ :
+    {
+        *(.note.gnu.build-id)
+        *(.comment)
+    }
+}
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<span id="document-booting"></span><div class="section" id="booting-and-getting-to-c">
+<h2>3. Booting and Getting to C<a class="headerlink" href="#booting-and-getting-to-c" title="Permalink to this headline">¶</a></h2>
+<p>Unlike writing a userland program in C, there is a not-so-insignificant amount
+of work we must do first to be able to compile and boot our operating system. In
+userland, most of this heavy lifting is performed for us by the compiler and linker,
+so we can simply write C and have it run.</p>
+<p>When writing our own operating system, none of this support exists! Writing it ourselves
+isn&#8217;t especially difficult.</p>
 </div>
 </div>
 </div>
@@ -95,9 +332,9 @@ particular interest to the author.</p>
 
       <div class="clearer"></div>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Sam Kingston &lt;sam@sjkwi.com.au&gt;.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
