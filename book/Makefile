@@ -20,7 +20,7 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean singlehtml epub latexpdf linkcheck serve
+.PHONY: help clean singlehtml epub latexpdf linkcheck serve gh-pages
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -59,3 +59,6 @@ linkcheck:
 
 serve: clean singlehtml
 	(cd $(BUILDDIR)/singlehtml &&	python3 -m http.server)
+
+gh-pages: singlehtml
+	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
