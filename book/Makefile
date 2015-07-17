@@ -20,7 +20,7 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean singlehtml epub latexpdf linkcheck serve gh-pages rebuild
+.PHONY: help clean singlehtml epub latexpdf linkcheck serve publish rebuild
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -29,6 +29,7 @@ help:
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  serve      to build a single large HTML file and serve it at http://localhost:8000/"
+	@echo "  publish    publish the build to git"
 	@echo "  rebuild    use inotifywait(1) to watch and rebuild the source when it changes"
 
 clean:
@@ -39,7 +40,6 @@ singlehtml:
 	@echo
 	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
 	touch $(BUILDDIR)/singlehtml/.nojekyll
-	rsync -av --delete --exclude '.git' $(BUILDDIR)/singlehtml/ $(COPYDIR)/
 
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
@@ -61,7 +61,8 @@ linkcheck:
 serve: clean singlehtml
 	(cd $(BUILDDIR)/singlehtml &&	python3 -m http.server)
 
-gh-pages: singlehtml
+publish: singlehtml
+	rsync -av --delete --exclude '.git' $(BUILDDIR)/singlehtml/ $(COPYDIR)/
 	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
 
 rebuild:
