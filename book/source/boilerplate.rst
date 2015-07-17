@@ -55,9 +55,6 @@ The rest of the ``Makefile`` specify rules about how to make parts of the
 kernel. If it isn't obvious to you how it works, have a look at some tutorials
 on Makefile rules as it's outside the scope of this book.
 
-.. literalinclude:: files/linker.ld
-   :language: 
-
 linker.ld: the linker script
 ----------------------------
 
