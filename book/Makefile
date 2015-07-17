@@ -58,8 +58,8 @@ linkcheck:
 	@echo "Link check complete; look for any errors in the above output " \
 	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
-serve: clean singlehtml
-	(cd $(BUILDDIR)/singlehtml &&	python3 -m http.server)
+serve:
+	(cd $(BUILDDIR)/singlehtml && python3 -m http.server)
 
 publish: singlehtml
 	rsync -av --delete --exclude '.git' $(BUILDDIR)/singlehtml/ $(COPYDIR)/
