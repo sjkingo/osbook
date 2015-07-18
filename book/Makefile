@@ -24,11 +24,11 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  html to make a single large HTML file"
+	@echo "  html       to make a HTML site"
 	@echo "  epub       to make an epub"
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
 	@echo "  linkcheck  to check all external links for integrity"
-	@echo "  serve      to build a single large HTML file and serve it at http://localhost:8000/"
+	@echo "  serve      to make a HTML site and serve it at http://localhost:8000/"
 	@echo "  publish    publish the build to git"
 	@echo "  rebuild    use inotifywait(1) to watch and rebuild the source when it changes"
 
@@ -38,7 +38,7 @@ clean:
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
-	@echo "Build finished. The HTML page is in $(BUILDDIR)/html."
+	@echo "Build finished. The HTML site is in $(BUILDDIR)/html."
 	touch $(BUILDDIR)/html/.nojekyll
 
 epub:
