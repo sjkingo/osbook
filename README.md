@@ -1,7 +1,14 @@
-Sam's OSDev book
-================
+# Sam's OSDev book
 
-To build the book, Sphinx 1.3+ is required.
+This book has been written to be a practical guide on developing operating
+systems, and specifially, for Intel's x86-architecture. The end result of
+working through this book will be a bootable kernel that you can expand upon.
+
+The book is available at http://sjkingo.github.io/osbook/
+
+## Building the book
+
+To build the book into HTML or PDF, Sphinx 1.3+ is required.
 
 ```bash
 $ pip install 'sphinx>=1.3'
