@@ -3,6 +3,7 @@
 body {
     font-family: 'Lora', serif;
     margin: 0;
+    background-color: #f6f6f6;
 }
 
 div.document {
@@ -11,14 +12,18 @@ div.document {
 }
 
 div.document p,
-ul {
-    font-size: 1.1em;
-    color: rgba(0, 0, 0, 0.8);
+ul,
+dt,
+dd {
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 div.document p,
 div.footer p,
-ul {
+ul,
+dt,
+dd {
     line-height: 1.6em;
 }
 
@@ -60,9 +65,9 @@ pre {
     padding: 0.5em;
     margin: 0.2em;
 }
-span.pre,
 .highlight {
-    background: #f6f6f6 !important;
+    background: #fdfdfd !important;
+    opacity: 0.75;
 }
 td.linenos {
     position: absolute;
@@ -81,4 +86,26 @@ div.code-block-caption {
     font-size: 1.1em;
     font-weight: 600;
     margin-left: 7px;
+}
+
+.navigation {
+    width: 100%;
+    text-align: center;
+    margin-top: 4em;
+}
+.navigation ul {
+    list-style: none;
+}
+.navigation li {
+    display: inline-block;
+    margin: 0 2em;
+}
+
+td.label {
+    padding-right: 0.75em;
+}
+
+/* Table of contents in index.rst */
+.toctree-wrapper ul {
+    list-style: none;
 }
