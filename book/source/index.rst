@@ -1,6 +1,10 @@
 A beginner's guide to operating systems development
 ===================================================
 
+This book has been written to be a practical guide on developing operating
+systems, and specifially, for Intel's x86-architecture. The end result of
+working through this book will be a bootable kernel that you can expand upon.
+
 .. toctree::
    :numbered:
 

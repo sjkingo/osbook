@@ -28,7 +28,7 @@ monolithic kernel
     (as opposed to a *micro*-kernel that makes a separation between core kernel
     and device drivers)
 
-Multiboot:
+Multiboot
     an open standard describing how a boot loader can load an x86 kernel [#multiboot]_
 
 operating system
@@ -49,4 +49,9 @@ The kernel
 The kernel you will write while reading this book will be a small x86
 monolithic kernel, and by the end contain the following features:
 
-* Multiboot compatible
+* Multiboot compatible (can be booted by grub2 or qemu)
+* Interrupt handling
+* VGA output
+* Memory management
+* Task switching
+* Basic device management
