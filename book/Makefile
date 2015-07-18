@@ -63,7 +63,7 @@ serve:
 
 publish: html
 	rsync -av --delete --exclude '.git' $(BUILDDIR)/html/ $(COPYDIR)/
-	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
+	(cd $(COPYDIR) && git add -A && git commit -m "Updated build of book" && git push)
 
 rebuild: html
 	while inotifywait -q -e modify -e create -e delete -r --exclude '\.(sw?)' source minimal_theme ; do make html ; done
