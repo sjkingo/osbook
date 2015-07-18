@@ -20,11 +20,11 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean singlehtml epub latexpdf linkcheck serve publish rebuild
+.PHONY: help clean html epub latexpdf linkcheck serve publish rebuild
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  singlehtml to make a single large HTML file"
+	@echo "  html to make a single large HTML file"
 	@echo "  epub       to make an epub"
 	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
 	@echo "  linkcheck  to check all external links for integrity"
@@ -35,11 +35,11 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 
-singlehtml:
-	$(SPHINXBUILD) -b singlehtml $(ALLSPHINXOPTS) $(BUILDDIR)/singlehtml
+html:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
-	@echo "Build finished. The HTML page is in $(BUILDDIR)/singlehtml."
-	touch $(BUILDDIR)/singlehtml/.nojekyll
+	@echo "Build finished. The HTML page is in $(BUILDDIR)/html."
+	touch $(BUILDDIR)/html/.nojekyll
 
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
@@ -59,11 +59,11 @@ linkcheck:
 	      "or in $(BUILDDIR)/linkcheck/output.txt."
 
 serve:
-	(cd $(BUILDDIR)/singlehtml && python3 -m http.server)
+	(cd $(BUILDDIR)/html && python3 -m http.server)
 
-publish: singlehtml
-	rsync -av --delete --exclude '.git' $(BUILDDIR)/singlehtml/ $(COPYDIR)/
+publish: html
+	rsync -av --delete --exclude '.git' $(BUILDDIR)/html/ $(COPYDIR)/
 	(cd $(COPYDIR) && git commit -a -m "Updated build of book" && git push)
 
-rebuild: singlehtml
-	while inotifywait -q -e modify -e create -e delete -r --exclude '\.(sw?)' source minimal_theme ; do make singlehtml ; done
+rebuild: html
+	while inotifywait -q -e modify -e create -e delete -r --exclude '\.(sw?)' source minimal_theme ; do make html ; done
