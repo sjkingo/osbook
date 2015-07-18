@@ -3,6 +3,7 @@
 body {
     font-family: 'Lora', serif;
     margin: 0;
+    background-color: #f6f6f6;
 }
 
 div.document {
@@ -14,8 +15,8 @@ div.document p,
 ul,
 dt,
 dd {
-    font-size: 1.1em;
-    color: rgba(0, 0, 0, 0.8);
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 div.document p,
@@ -64,9 +65,9 @@ pre {
     padding: 0.5em;
     margin: 0.2em;
 }
-span.pre,
 .highlight {
-    background: #f6f6f6 !important;
+    background: #fdfdfd !important;
+    opacity: 0.75;
 }
 td.linenos {
     position: absolute;
@@ -102,4 +103,9 @@ div.code-block-caption {
 
 td.label {
     padding-right: 0.75em;
+}
+
+/* Table of contents in index.rst */
+.toctree-wrapper ul {
+    list-style: none;
 }
