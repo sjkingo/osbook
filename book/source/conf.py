@@ -13,6 +13,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
+from __future__ import unicode_literals
 import sys
 import os
 
@@ -45,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Operating Systems Development'
-copyright = '2015, Sam Kingston <sam@sjkwi.com.au>'
+copyright = '© Copyright 2015 <a href="mailto:sam@sjkwi.com.au">Sam Kingston</a>'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -137,7 +138,7 @@ html_static_path = ['_static']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-#html_last_updated_fmt = '%b %d, %Y'
+html_last_updated_fmt = '%Y-%m-%d'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.

@@ -20,7 +20,6 @@ dd {
 }
 
 div.document p,
-div.footer p,
 ul,
 dt,
 dd {
@@ -33,7 +32,10 @@ div.footer {
     color: #666;
     margin-top: 4em;
     border-top: 1px solid #ededed;
-    padding: 0.5em;
+    padding: 0.25em;
+}
+div.footer p {
+    line-height: 10px;
 }
 
 h1 {
@@ -108,4 +110,8 @@ td.label {
 /* Table of contents in index.rst */
 .toctree-wrapper ul {
     list-style: none;
+}
+
+.pad-around {
+    padding: 0 0.25em;
 }

@@ -25,6 +25,14 @@
     <li><a href="{{ next.link|e }}">Next: {{ next.title }}</a></li>
     {% endif %}
 </ul>
+
+{% block footer %}
+
+<div class="footer">
+    <p>{{ copyright }} <span class="pad-around">·</span> Created using Sphinx {{ sphinx_version }}</p>
+    <p>Last built {{ last_updated }} <span class="pad-around">·</span> <a href="https://raw.githubusercontent.com/sjkingo/osbook/master/book/source/{{ pagename }}.rst">View this page's source</a></p>
+
+{% endblock %}
 </div>
 
 {% endblock %}
