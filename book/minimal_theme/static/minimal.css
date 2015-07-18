@@ -11,14 +11,18 @@ div.document {
 }
 
 div.document p,
-ul {
+ul,
+dt,
+dd {
     font-size: 1.1em;
     color: rgba(0, 0, 0, 0.8);
 }
 
 div.document p,
 div.footer p,
-ul {
+ul,
+dt,
+dd {
     line-height: 1.6em;
 }
 
@@ -94,4 +98,8 @@ div.code-block-caption {
 .navigation li {
     display: inline-block;
     margin: 0 2em;
+}
+
+td.label {
+    padding-right: 0.75em;
 }
