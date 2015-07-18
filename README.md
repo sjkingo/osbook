@@ -20,7 +20,7 @@ There are more targets available in the `Makefile`:
 
 ```bash
 $ make -C book help
-Please use `make <target>' where <target> is one of
+Please use 'make <target>' where <target> is one of
   html       to make a HTML site
   epub       to make an epub
   latexpdf   to make LaTeX files and run them through pdflatex
