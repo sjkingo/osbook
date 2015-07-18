@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. Introduction &mdash; Operating Systems Development 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/minimal.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Operating Systems Development 1.0 documentation" href="index.html" />
+    <link rel="next" title="2. Build boilerplate" href="boilerplate.html" />
+    <link rel="prev" title="A beginner’s guide to operating systems development" href="index.html" /> 
+  </head>
+  <body role="document">
+
+    <div class="document">
+
+<a href="https://github.com/sjkingo/osbook"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
+
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This book has been written to be a practical guide on developing operating
+systems, and specifially, for Intel&#8217;s x86-architecture. It assumes you already
+have a working knowledge of the internals of an operating system and will
+attempt to guide you along to implement that knowledge. The end result of this
+book will be a bootable kernel that you can expand upon.</p>
+<p>Some theory will be presented where appropriate and in topics that are of
+particular interest to the author.</p>
+<div class="section" id="required-knowledge">
+<h2>1.1. Required knowledge<a class="headerlink" href="#required-knowledge" title="Permalink to this headline">¶</a></h2>
+<p>You will need a strong knowledge of C, an ability to understand the syntax of
+assembly (though you won&#8217;t need to write much), and a general theory of how
+operating systems work &#8211; this book will tell you how they&#8217;re put together.</p>
+</div>
+<div class="section" id="terminology">
+<h2>1.2. Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>kernel</dt>
+<dd>the core piece of software that interfaces software with hardware</dd>
+<dt>monolithic kernel</dt>
+<dd>a type of kernel that implements all of its functions in one large binary
+(as opposed to a <em>micro</em>-kernel that makes a separation between core kernel
+and device drivers)</dd>
+<dt>Multiboot</dt>
+<dd>an open standard describing how a boot loader can load an x86 kernel <a class="footnote-reference" href="#multiboot" id="id1">[1]</a></dd>
+<dt>operating system</dt>
+<dd>a complete software package including both a kernel and a userland implementation</dd>
+<dt>userland</dt>
+<dd>a collection of programs, libraries and scripts that the user uses to interface with a kernel</dd>
+</dl>
+<table class="docutils footnote" frame="void" id="multiboot" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference external" href="https://www.gnu.org/software/grub/manual/multiboot/multiboot.html">Multiboot Specification v0.6.96</a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="the-kernel">
+<h2>1.3. The kernel<a class="headerlink" href="#the-kernel" title="Permalink to this headline">¶</a></h2>
+<p>The kernel you will write while reading this book will be a small x86
+monolithic kernel, and by the end contain the following features:</p>
+<ul class="simple">
+<li>Multiboot compatible (can be booted by grub2 or qemu)</li>
+<li>Interrupt handling</li>
+<li>VGA output</li>
+<li>Memory management</li>
+<li>Task switching</li>
+<li>Basic device management</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="clearer"></div>
+    </div>
+
+<div class="navigation">
+<ul>
+    
+    <li><a href="index.html">Previous: A beginner&#8217;s guide to operating systems development</a></li>
+    
+    
+    <li><a href="boilerplate.html">Next: 2. Build boilerplate</a></li>
+    
+</ul>
+</div>
+
+
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Sam Kingston &lt;sam@sjkwi.com.au&gt;.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
