@@ -6,7 +6,9 @@ body {
     background-color: #f6f6f6;
 }
 
-div.document {
+div.document,
+div.navigation,
+div.footer {
     max-width: 50em;
     margin: 0 auto;
 }
@@ -17,12 +19,6 @@ dt,
 dd {
     font-size: 18px;
     color: rgba(0, 0, 0, 0.75);
-}
-
-div.document p,
-ul,
-dt,
-dd {
     line-height: 1.6em;
 }
 
